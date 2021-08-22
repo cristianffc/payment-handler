@@ -10,5 +10,19 @@ public abstract class Discount {
         this.discount = discount;
     }
 
-    public abstract Budget calculate(Budget budget);
+    public Budget calculate(Budget budget) {
+        if (shouldApply(budget)) {
+            budget = executeCalculation(budget);
+        }
+
+        if (discount == null) {
+            return budget;
+        }
+
+        return discount.calculate(budget);
+    }
+
+    public abstract Boolean shouldApply(Budget budget);
+
+    public abstract Budget executeCalculation(Budget budget);
 }

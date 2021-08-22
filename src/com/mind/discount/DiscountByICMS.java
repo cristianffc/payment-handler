@@ -9,11 +9,13 @@ public class DiscountByICMS extends Discount {
     }
 
     @Override
-    public Budget calculate(Budget budget) {
-        if (budget.getItems() > 10) {
-            budget = new Budget(budget.getValue() - 100, budget.getItems());
-        }
-
-        return discount.calculate(budget);
+    public Boolean shouldApply(Budget budget) {
+        return budget.getItems() > 10;
     }
+
+    @Override
+    public Budget executeCalculation(Budget budget) {
+        return new Budget(budget.getValue() - 100, budget.getItems());
+    }
+
 }

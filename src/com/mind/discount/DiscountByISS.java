@@ -9,12 +9,13 @@ public class DiscountByISS extends Discount {
     }
 
     @Override
-    public Budget calculate(Budget budget) {
-        
-        if (budget.getItems() > 15) {
-            budget = new Budget(budget.getValue() - 1000, budget.getItems());
-        }
-
-        return discount.calculate(budget);
+    public Boolean shouldApply(Budget budget) {
+        return budget.getItems() > 15;
     }
+
+    @Override
+    public Budget executeCalculation(Budget budget) {
+        return new Budget(budget.getValue() - 1000, budget.getItems());
+    }
+
 }
