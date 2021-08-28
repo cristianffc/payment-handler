@@ -2,6 +2,7 @@ package com.mind.purchase;
 
 import com.mind.order.domain.Order;
 import com.mind.order.domain.situation.OrderInDraft;
+import com.mind.purchase.adapter.JavaHttpAdapter;
 import com.mind.purchase.command.MakePurchaseCommand;
 import com.mind.purchase.command.ReviewPurchaseCommand;
 import com.mind.purchase.domain.Purchase;
@@ -19,7 +20,8 @@ public class MainPurchase {
         final var orderTwo = new Order(400, 10, new OrderInDraft());
         final var purchaseTwo = new Purchase("Charles Watson", orderTwo);
 
-        final var makePurchase = new MakePurchaseCommand(purchaseOne, Arrays.asList(new NotifyServiceAction(), new SaveDatabaseAction()));
+        final var makePurchase = new MakePurchaseCommand(purchaseOne, Arrays.asList(new NotifyServiceAction(new JavaHttpAdapter()),
+                new SaveDatabaseAction()));
         final var reviewPurchase = new ReviewPurchaseCommand(purchaseTwo);
 
         makePurchase.executeCommand();
