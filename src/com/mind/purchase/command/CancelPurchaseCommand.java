@@ -11,7 +11,7 @@ public class CancelPurchaseCommand extends PurchaseCommand {
     }
 
     @Override
-    public void execute() {
+    public void executeCommand() {
         out.println("Start - Cancel purchase command");
         out.println("Send message to queue");
         out.println("Send message to service to cancel purchase");

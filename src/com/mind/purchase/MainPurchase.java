@@ -5,6 +5,10 @@ import com.mind.order.domain.situation.OrderInDraft;
 import com.mind.purchase.command.MakePurchaseCommand;
 import com.mind.purchase.command.ReviewPurchaseCommand;
 import com.mind.purchase.domain.Purchase;
+import com.mind.purchase.observer.NotifyServiceAction;
+import com.mind.purchase.observer.SaveDatabaseAction;
+
+import java.util.Arrays;
 
 public class MainPurchase {
 
@@ -15,10 +19,10 @@ public class MainPurchase {
         final var orderTwo = new Order(400, 10, new OrderInDraft());
         final var purchaseTwo = new Purchase("Charles Watson", orderTwo);
 
-        final var makePurchase = new MakePurchaseCommand(purchaseOne);
+        final var makePurchase = new MakePurchaseCommand(purchaseOne, Arrays.asList(new NotifyServiceAction(), new SaveDatabaseAction()));
         final var reviewPurchase = new ReviewPurchaseCommand(purchaseTwo);
 
-        makePurchase.execute();
-        reviewPurchase.execute();
+        makePurchase.executeCommand();
+        reviewPurchase.executeCommand();
     }
 }

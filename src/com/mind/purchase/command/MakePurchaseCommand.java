@@ -1,20 +1,25 @@
 package com.mind.purchase.command;
 
 import com.mind.purchase.domain.Purchase;
+import com.mind.purchase.observer.MakePurchaseAction;
+
+import java.util.List;
 
 import static java.lang.System.out;
 
 public class MakePurchaseCommand extends PurchaseCommand {
 
-    public MakePurchaseCommand(Purchase purchase) {
+    List<MakePurchaseAction> actionList;
+
+    public MakePurchaseCommand(Purchase purchase, List<MakePurchaseAction> actionList) {
         super(purchase);
+        this.actionList = actionList;
     }
 
     @Override
-    public void execute() {
+    public void executeCommand() {
         out.println("Start - Make purchase command");
-        out.println("Send message to database");
-        out.println("Send message to service to make purchase");
+        actionList.forEach(makePurchaseAction -> makePurchaseAction.execute(getPurchase()));
         out.println("Finish - Make purchase command");
     }
 }

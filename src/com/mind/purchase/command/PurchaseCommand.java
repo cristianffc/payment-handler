@@ -16,6 +16,10 @@ public abstract class PurchaseCommand {
         out.println(purchase);
     }
 
-    public abstract void execute();
+    public Purchase getPurchase() {
+        return purchase;
+    }
+
+    public abstract void executeCommand();
 
 }

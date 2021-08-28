@@ -11,7 +11,7 @@ public class ReviewPurchaseCommand extends PurchaseCommand {
     }
 
     @Override
-    public void execute() {
+    public void executeCommand() {
         out.println("Start - Review purchase command");
         out.println("Send email");
         out.println("Send message to service to review purchase");
