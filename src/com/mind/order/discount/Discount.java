@@ -13,11 +13,7 @@ public abstract class Discount {
     public Order calculate(Order order) {
 
         if (shouldApply(order)) {
-            order = executeCalculation(order);
-        }
-
-        if(nextDiscount == null) {
-            return order;
+            return executeCalculation(order);
         }
 
         return nextDiscount.calculate(order);
