@@ -1,8 +1,9 @@
 package com.mind.order.domain;
 
 import com.mind.order.domain.situation.OrderSituation;
+import com.mind.purchase.domain.Budgetable;
 
-public class Order {
+public class Order implements Budgetable {
 
     private final Integer value;
     private final Integer items;

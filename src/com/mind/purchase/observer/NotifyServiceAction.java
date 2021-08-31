@@ -18,7 +18,10 @@ public class NotifyServiceAction implements MakePurchaseAction {
     @Override
     public void execute(Purchase purchase) {
         out.println("Notify service" + purchase);
-        httpAdapter.post("api.com", Map.of("customerName", purchase.getCustomerName(),
-                "value", purchase.getOrder().getValue()));
+        purchase.getBudgetableList().forEach(budgetable -> {
+            httpAdapter.post("api.com", Map.of("customerName", purchase.getCustomerName(),
+                    "value", budgetable.getValue()));
+        });
+
     }
 }
